@@ -13,6 +13,7 @@ for _ in range(num_light_trains):
     adjacency_list[planet_a].append(planet_b)
     adjacency_list[planet_b].append(planet_a)
 
+
 def bfs(source):
     distance = [-1] * (num_planets + 1)
     distance[source] = 0
@@ -24,6 +25,7 @@ def bfs(source):
                 distance[neighbour] = distance[current_planet] + 1
                 queue.append(neighbour)
     return distance
+
 
 distance_from_start = bfs(1)
 distance_to_goal = bfs(num_planets)
@@ -40,11 +42,11 @@ optimal_denominator = 1
 
 for wormhole_start in wormhole_nodes:
     candidate_numerator = (
-        distance_from_start[wormhole_start] * (num_wormholes-1)
+        distance_from_start[wormhole_start] * (num_wormholes - 1)
         + total_goal_distance
         - distance_to_goal[wormhole_start]
     )
-    candidate_denominator = (num_wormholes-1)
+    candidate_denominator = (num_wormholes - 1)
     if candidate_numerator * optimal_denominator < optimal_numerator * candidate_denominator:
         optimal_numerator, optimal_denominator = candidate_numerator, candidate_denominator
 
